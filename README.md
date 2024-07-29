@@ -8,7 +8,7 @@ Algorithms
           -> Merge Sort
           -> Heap Sort
           -> Radix Sort
-          -> Bucket Sort
+          -> Bucket Sort         
 
           * Searching Algorithms
           -> Binary Search
