@@ -81,7 +81,62 @@ class Singly_LinkedList:
             # increment the length
             self.length+=1
             
+    # Delete an  item at the end
+    def deleteAt(self, index):
+
+        # check the list is empty
+        if self.head is None:
+            print("Linked list is empty")
+            return 
+
+        # remove the first index
+        elif index == 0 :
             
+            self.head = self.head.nextNode
+
+            self.length-=1
+
+            if self.head is None: # If list is empty the tail shold be update
+                self.tail = None
+
+
+        # check the index in range
+        elif 0<=index and index <= self.length - 1 :
+            
+            previousNode = self.head
+            for i in range(index-1):
+                previousNode = previousNode.nextNode # get the previous Node
+
+            # assign the node before the index node, to the node after the index node
+            nodeToDelete = previousNode.nextNode
+            previousNode.nextNode = nodeToDelete.nextNode
+
+            # check whether the deleted node is the last node
+            if nodeToDelete == self.tail:
+                self.tail = previousNode # update the tail
+            
+            self.length-=1
+
+        # index out of bounds
+        else:
+            print("Index out of bounds")
+
+
+    # search a value
+    def search(self, value):
+        currentNode = self.head
+
+        for i in range(self.length):
+                
+            # check whether the current node's value is equal to the searched value
+            if currentNode.data == value:
+                return True
+                
+            currentNode = currentNode.nextNode
+
+        # value does not found  
+        else:
+            return False
             
 
 # create object
@@ -100,8 +155,25 @@ objLL.prepend(21)
 # display
 objLL.display()
 
-# inset in a given index
-objLL.insertAt(2, 105)
+# delete At
+objLL.deleteAt(2)
 
 # display
 objLL.display()
+
+# delete At
+objLL.deleteAt(0)
+
+# display
+objLL.display()
+
+# get the length
+length = objLL.length
+print(length)
+
+# check whether, an element is in the list
+status1 = objLL.search(12)
+print(status1)
+
+status2 = objLL.search(44)
+print(status2)
