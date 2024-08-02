@@ -67,9 +67,43 @@ class Doubly_Linked_List:
             currentNode = currentNode.previousNode
         print(" - > None")
 
+    # insert at given position
+    def insertAt(self, index, value):
+
+        # if the index is the begininng of the list
+        if index == 0:
+            self.prepend(value)
+
+        elif index == self.length-1:
+            self.append(value)
+
+        # check the index is with in the range of the list
+        elif 1 <= index and self.length - 1 > index:
+            
+            newNode = Node(value)
+
+            currentNode = self.head
+            for i in range(index-1):
+                currentNode = currentNode.nextNode
+
+            newNode.nextNode = currentNode.nextNode
+            currentNode.nextNode.previousNode = newNode
+            newNode.previousNode = currentNode
+            currentNode.nextNode = newNode
+
+        else :
+            print("invalid length")
+            return
+
+        self.length+=1
+
+                
+    
     # return the size of the linked list
     def length(self):
         return self.length
+
+    # delete at
         
 # create an object
 objDLL = Doubly_Linked_List()
@@ -84,6 +118,11 @@ objDLL.prepend(70)
 objDLL.prepend(80)
 objDLL.prepend(90)
 
+# print the list
+objDLL.displayForward()
+
+# insert at
+objDLL.insertAt(2,300)
 
 # print the list
 objDLL.displayForward()
