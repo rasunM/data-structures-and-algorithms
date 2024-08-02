@@ -100,10 +100,49 @@ class Doubly_Linked_List:
                 
     
     # return the size of the linked list
-    def length(self):
+    def getLength(self):
         return self.length
 
-    # delete at
+    # delete at a given index
+    def deleteAt(self, index):
+
+        # check the index is not in the given range
+        if index<0 or index >= self.length:
+            print("Invalid Range")
+            return
+
+        if index == 0:
+            self._deleteNode(self.head)
+
+        elif index == self.length-1:
+            self._deleteNode(self.tail)
+
+        else:
+            currentNode = self.head
+            for i in range(index):
+                currentNode = currentNode.nextNode
+            self._deleteNode(currentNode)
+
+    # delete the passed node 
+    def _deleteNode(self, node):
+        if node is self.head:
+            self.head = node.nextNode
+            # if the head is not None update the previousNode property
+            if self.head is not None:
+                self.head.previous = None
+                
+        elif node is self.tail:
+            self.tail = node.previousNode
+            # if the tail is not None, update the nextNode property
+            if self.tail is not None:
+                self.tail.nextNode = None
+
+        else:
+            node.previousNode.nextNode = node.nextNode # update the values of nodes between the current node
+            node.nextNode.previousNode = node.previousNode
+
+        # update the length
+        self.length-=1
         
 # create an object
 objDLL = Doubly_Linked_List()
@@ -123,6 +162,15 @@ objDLL.displayForward()
 
 # insert at
 objDLL.insertAt(2,300)
+
+# print the list
+objDLL.displayForward()
+
+# print the list in reverse order
+objDLL.displayBackward()
+
+# delete a value at a given index
+objDLL.deleteAt(3)
 
 # print the list
 objDLL.displayForward()
